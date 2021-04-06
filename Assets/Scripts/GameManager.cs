@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 	public void OnGameStart()
 	{
 		isGameOn = true;
+		UIManager.instance.StartedScreenUI();
 	}
 
 	public void OnGameFinish()

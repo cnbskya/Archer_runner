@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 	
 	public void StartedScreenUI()
 	{
-		//startGamePanel.SetActive(false);
+		startGamePanel.SetActive(false);
 		//topUI.SetActive(true);
 	}
 	
