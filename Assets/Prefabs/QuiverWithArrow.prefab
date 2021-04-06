@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de07371707151344cb565e4cf82d8b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrefab: {fileID: 6981926699773207661, guid: c615d239f9846d547a415bb45cf8faf1,
+    type: 3}
+  tryCamera: {fileID: 0}
 --- !u!64 &8823744296853108701
 MeshCollider:
   m_ObjectHideFlags: 0

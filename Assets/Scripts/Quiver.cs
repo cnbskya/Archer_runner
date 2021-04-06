@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class Quiver : MonoBehaviour
 {
+	public GameObject floatingTextPrefab;
 	private void Update()
 	{
 		// Oyun başladığında rotate olmaya başlayacaktır.
@@ -18,7 +19,13 @@ public class Quiver : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
+			ShowFloatingText(other);
 			Destroy(gameObject);
 		}
+	}
+
+	public void ShowFloatingText(Collider other)
+	{
+		Instantiate(floatingTextPrefab, transform.position, other.transform.rotation);
 	}
 }
