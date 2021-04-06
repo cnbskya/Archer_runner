@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
+	public GameObject touchPanel;
 	public bool isGameOn;
 	private void Awake()
 	{
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
 	public void OnGameFinish()
 	{
 		isGameOn = false;
+		touchPanel.SetActive(false);
 	}
 
 

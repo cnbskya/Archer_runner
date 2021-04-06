@@ -15,10 +15,23 @@ public class Character : MonoBehaviour
             GoForward(); 
 		}
     }
-
-    public void GoForward()
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("GroundObstacle"))
+		{
+			animator.SetBool("groundReact", true);
+			//animator.SetBool
+		}
+		else if (other.gameObject.CompareTag("Saw") || other.gameObject.CompareTag("Axe"))
+		{
+			animator.SetBool("isDead", true);
+			GameManager.instance.OnGameFinish();
+		}
+	}
+	public void GoForward()
 	{
         gameObject.transform.position += Vector3.forward * speed * Time.deltaTime; // Change Forward positions
         animator.SetBool("isRunning", true); // Running animation start.
     }
+
 }

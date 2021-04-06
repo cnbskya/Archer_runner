@@ -7,6 +7,18 @@ public class Quiver : MonoBehaviour
 {
 	private void Update()
 	{
-		transform.DORotate(new Vector3(-90, 0, -360), 1f, RotateMode.Fast);
+		// Oyun başladığında rotate olmaya başlayacaktır.
+		if (GameManager.instance.isGameOn)
+		{
+			transform.Rotate(Vector3.forward, 1f); // Objenin rotation'u localde farklı olduğundan globaldeki y axisinde dönüyor.
+		}
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Player"))
+		{
+			Destroy(gameObject);
+		}
 	}
 }
