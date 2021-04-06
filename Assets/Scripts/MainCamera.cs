@@ -15,7 +15,7 @@ public class MainCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DefaultOffset = new Vector3(0, 5, -5f);
+        DefaultOffset = new Vector3(0, 4, -4);
         CameraRePosition(DefaultOffset);
     }
 
