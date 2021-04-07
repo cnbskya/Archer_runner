@@ -22,6 +22,10 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
 	private void Update()
 	{
+        ChooseTarget();
+    }
+    public void ChooseTarget()
+	{
         if (FindObjectOfType<Character>().isCharacterForward)
         {
             runn_e = character.transform;
@@ -31,7 +35,6 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
             runn_e = slideBow.transform;
         }
     }
-
 	public void OnDrag(PointerEventData eventData)
     {
         mousePosHolder = eventData;
