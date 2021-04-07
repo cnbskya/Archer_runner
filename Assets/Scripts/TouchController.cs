@@ -7,6 +7,8 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
     [SerializeField] Transform runn_e;
     [SerializeField] Transform minClampTr, maxClampTr;
+    public GameObject character;
+    public GameObject slideBow;
 
     [SerializeField] float moveSensitivity;
 
@@ -18,12 +20,19 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         Instance = this;
     }
 
-    void Start()
-    {
-
+	private void Update()
+	{
+        if (FindObjectOfType<Character>().isCharacterForward)
+        {
+            runn_e = character.transform;
+        }
+        else
+        {
+            runn_e = slideBow.transform;
+        }
     }
 
-    public void OnDrag(PointerEventData eventData)
+	public void OnDrag(PointerEventData eventData)
     {
         mousePosHolder = eventData;
         TouchDetectionMovement(mousePosHolder);

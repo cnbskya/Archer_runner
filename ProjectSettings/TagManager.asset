@@ -8,6 +8,8 @@ TagManager:
   - GroundObstacle
   - Saw
   - Axe
+  - Ground
+  - AirObstacle
   layers:
   - Default
   - TransparentFX

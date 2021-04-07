@@ -5,14 +5,24 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public GameObject character;
+	public GameObject slideBow;
+	Rigidbody rb;
     public Animator animator;
+	public ParticleSystem blood;
     public float speed;
+	public float rayDistance;
+	public bool isCharacterForward;
 
-    void Update()
+	private void Start()
+	{
+		rb = gameObject.GetComponent<Rigidbody>();
+	}
+	void Update()
     {
 		if (GameManager.instance.isGameOn)
 		{
-            GoForward(); 
+			GoForward();
+			WhatIsBehind();
 		}
     }
 	private void OnTriggerEnter(Collider other)
@@ -22,16 +32,50 @@ public class Character : MonoBehaviour
 			animator.SetBool("groundReact", true);
 			//animator.SetBool
 		}
+		else if (other.gameObject.CompareTag("AirObstacle"))
+		{
+			animator.SetBool("airReact", true);
+		}
 		else if (other.gameObject.CompareTag("Saw") || other.gameObject.CompareTag("Axe"))
 		{
 			animator.SetBool("isDead", true);
+			blood.Play();
 			GameManager.instance.OnGameFinish();
 		}
 	}
 	public void GoForward()
 	{
-        gameObject.transform.position += Vector3.forward * speed * Time.deltaTime; // Change Forward positions
-        animator.SetBool("isRunning", true); // Running animation start.
+		if (isCharacterForward)
+		{
+			gameObject.transform.position += Vector3.forward * speed * Time.deltaTime; // Change Forward positions
+			animator.SetBool("isRunning", true); // Running animation start.
+		}
+		else
+		{
+			slideBow.transform.position += Vector3.forward * speed * Time.deltaTime;
+		}
     }
 
+	public void WhatIsBehind()
+	{
+		RaycastHit hit;
+		if(Physics.Raycast(transform.position + new Vector3(0,0.5f,0), Vector3.down, out hit, rayDistance))
+		{
+			if (hit.transform.CompareTag("Ground"))
+			{
+				isCharacterForward = true;
+				slideBow.SetActive(false);
+				gameObject.transform.SetParent(null);
+				slideBow.GetComponent<Rigidbody>().useGravity = true;
+			}
+		}
+		else //Grounddan ayrılınca olacak onlar 
+		{
+			isCharacterForward = false;
+			slideBow.SetActive(true);
+			slideBow.transform.SetParent(null);
+			gameObject.transform.SetParent(slideBow.transform);
+			slideBow.GetComponent<Rigidbody>().useGravity = true;
+		}
+	}
 }
