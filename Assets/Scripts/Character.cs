@@ -44,6 +44,18 @@ public class Character : MonoBehaviour
 			GameManager.instance.OnGameFinish();
 		}
 	}
+
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.gameObject.CompareTag("Ground"))
+		{
+			isCharacterForward = true;
+			slideBow.SetActive(false);
+			gameObject.transform.SetParent(null);
+			slideBow.transform.SetParent(gameObject.transform);
+			slideBow.GetComponent<Rigidbody>().useGravity = true;
+		}
+	}
 	public void GoForward()
 	{
 		if (isCharacterForward)
@@ -62,13 +74,7 @@ public class Character : MonoBehaviour
 		RaycastHit hit;
 		if(Physics.Raycast(transform.position + new Vector3(0,0.5f,0), Vector3.down, out hit, rayDistance))
 		{
-			if (hit.transform.CompareTag("Ground"))
-			{
-				isCharacterForward = true;
-				slideBow.SetActive(false);
-				gameObject.transform.SetParent(null);
-				slideBow.GetComponent<Rigidbody>().useGravity = true;
-			}
+
 		}
 		else //Grounddan ayrılınca olacak onlar 
 		{
