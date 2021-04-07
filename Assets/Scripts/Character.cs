@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
     }
 	private void OnTriggerEnter(Collider other)
 	{
+		// ************ OBSTACLE *****************
 		if (other.gameObject.CompareTag("GroundObstacle"))
 		{
 			animator.SetBool("groundReact", true);
