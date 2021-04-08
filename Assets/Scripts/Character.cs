@@ -16,11 +16,13 @@ public class Character : MonoBehaviour
 	private void Start()
 	{
 		rb = gameObject.GetComponent<Rigidbody>();
+		animator.enabled = false;
 	}
 	void Update()
     {
 		if (GameManager.instance.isGameOn)
 		{
+			animator.enabled = true;
 			GoForward();
 			WhatIsBehind();
 		}
