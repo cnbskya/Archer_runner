@@ -1060,6 +1060,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &692194035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692194036}
+  m_Layer: 0
+  m_Name: RightHandIKPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692194036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692194035}
+  m_LocalRotation: {x: 0.42490366, y: -0.565204, z: 0.4359733, w: 0.5567124}
+  m_LocalPosition: {x: -0.8510538, y: 1.4010069, z: 0.0710667}
+  m_LocalScale: {x: 0.6579823, y: 0.99979746, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1848442904}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &703026514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,7 +1104,7 @@ GameObject:
   - component: {fileID: 703026515}
   m_Layer: 0
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: SlideStick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1148,7 +1178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703026514}
   m_LocalRotation: {x: -0.6427876, y: 0, z: 0, w: 0.7660445}
-  m_LocalPosition: {x: 0.75, y: -1.16, z: 13}
+  m_LocalPosition: {x: 0.5, y: -1.16, z: 13}
   m_LocalScale: {x: 0.2, y: -5.86861, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1449,7 +1479,7 @@ GameObject:
   - component: {fileID: 837241439}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: SlideStick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1523,7 +1553,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837241438}
   m_LocalRotation: {x: -0.6427876, y: 0, z: 0, w: 0.7660445}
-  m_LocalPosition: {x: -0.5, y: -1.16, z: 13}
+  m_LocalPosition: {x: -0.25, y: -1.16, z: 13}
   m_LocalScale: {x: 0.2, y: -5.86861, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2319,13 +2349,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848442903}
-  m_LocalRotation: {x: -0.43045866, y: 0.56098485, z: -0.4304603, w: 0.56098604}
-  m_LocalPosition: {x: 0, y: 0.9079999, z: 1.1719998}
-  m_LocalScale: {x: 1, y: 1, z: 1.52}
-  m_Children: []
+  m_LocalRotation: {x: -0.4456454, y: 0.58501273, z: -0.41472223, w: 0.53587854}
+  m_LocalPosition: {x: 0.16777165, y: 1.18, z: 1.204}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 692194036}
+  - {fileID: 2112848155}
   m_Father: {fileID: 1693882621659048555}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: -75}
+  m_LocalEulerAnglesHint: {x: 0.43600002, y: 94.685005, z: -75}
 --- !u!23 &1848442905
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2697,6 +2729,36 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   m_EffectDistance: {x: -10, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!1 &2112848154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2112848155}
+  m_Layer: 0
+  m_Name: LeftHandIKPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2112848155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112848154}
+  m_LocalRotation: {x: 0.42490366, y: -0.565204, z: 0.4359733, w: 0.5567124}
+  m_LocalPosition: {x: -0.8581, y: 1.459, z: -0.1964}
+  m_LocalScale: {x: 0.6579823, y: 0.99979746, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1848442904}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2145561717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3329,7 +3391,7 @@ Transform:
   m_GameObject: {fileID: 2074525457461653713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1848442904}
   - {fileID: 9160217968112800030}
@@ -3503,6 +3565,7 @@ GameObject:
   - component: {fileID: 2074525457461653715}
   - component: {fileID: 2074525457461653716}
   - component: {fileID: 2074525457461653717}
+  - component: {fileID: 2074525457461653718}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -3519,7 +3582,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074525457461653713}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 49f579cc0dfd8b84e905ec7ffd7c51c9, type: 3}
   m_Controller: {fileID: 9100000, guid: 1de4c5da458724f43b34eded0d4519f9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -3543,6 +3606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 2074525457461653713}
   slideBow: {fileID: 1848442903}
+  bowSkinnedMesh: {fileID: 6610382161176142128}
   animator: {fileID: 2074525457461653714}
   blood: {fileID: 2811490057719162592}
   speed: 5
@@ -3575,9 +3639,29 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.29172525
-  m_Height: 1.9898136
+  m_Height: 2.0926888
   m_Direction: 1
-  m_Center: {x: 0, y: 0.81256187, z: 0.06872924}
+  m_Center: {x: 0, y: 0.76112425, z: 0.06872925}
+--- !u!114 &2074525457461653718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074525457461653713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3eb5e2305f273146a891653337eb2c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2074525457461653714}
+  rightHandPositionWeight: 0
+  rightHandRotationWeight: 0
+  leftHandPositionWeight: 0
+  leftHandRotationWeight: 0
+  duration: 1
+  rightHandTransform: {fileID: 692194036}
+  leftHandTransform: {fileID: 2112848155}
 --- !u!4 &2086767789486204655
 Transform:
   m_ObjectHideFlags: 0

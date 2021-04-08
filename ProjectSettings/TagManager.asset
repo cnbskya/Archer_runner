@@ -10,6 +10,7 @@ TagManager:
   - Axe
   - Ground
   - AirObstacle
+  - SlideStick
   layers:
   - Default
   - TransparentFX
