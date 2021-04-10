@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 
 public class Character : MonoBehaviour
 {
-    public GameObject character;
+	[Header("GameObjects")]
+	public GameObject character;
 	public GameObject slideBow;
 	public GameObject bowSkinnedMesh;
 	Rigidbody rb;
-    public Animator animator;
+	public Animator animator;
 	public ParticleSystem blood;
-    public float speed;
-	public float rayDistance;
+
+	[Header("Variables")]
+	public float speed;
 	public bool isCharacterForward;
+	public bool isBalance;
 
 	private void Start()
 	{
@@ -20,13 +24,13 @@ public class Character : MonoBehaviour
 		animator.enabled = false;
 	}
 	void Update()
-    {
+	{
 		if (GameManager.instance.isGameOn)
 		{
 			animator.enabled = true;
 			GoForward();
 		}
-    }
+	}
 	private void OnTriggerEnter(Collider other)
 	{
 		// ************ OBSTACLE *****************
@@ -45,38 +49,28 @@ public class Character : MonoBehaviour
 			blood.Play();
 			GameManager.instance.OnGameFinish();
 		}
-	}
 
-	
-	// GROUNDA GİRİNCE
-	private void OnTriggerStay(Collider other)
-	{
-		if (other.gameObject.CompareTag("Ground"))
+		if (other.gameObject.CompareTag("Ground")) // Ground ile tetiklenmişse
 		{
-			FindObjectOfType<CharacterIKSystem>().IKWeightDecrease();
-			bowSkinnedMesh.SetActive(true);
-			animator.SetBool("isHanging", false);
-			isCharacterForward = true;
-			slideBow.SetActive(false);
-			gameObject.transform.SetParent(null);
-			slideBow.transform.SetParent(gameObject.transform);
-			slideBow.GetComponent<Rigidbody>().useGravity = true;
+			InGround();
+
+		}
+		else if (other.gameObject.CompareTag("GroundBalance"))
+		{
+			InBalanceGround();
 		}
 	}
-
 	// GROUNDDAN AYRILINCA 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.CompareTag("Ground"))
+		if (other.gameObject.CompareTag("Ground") && isBalance == false)
 		{
-			FindObjectOfType<CharacterIKSystem>().IKWeightIncrease();
-			bowSkinnedMesh.SetActive(false);
-			animator.SetBool("isHanging", true);
-			isCharacterForward = false;
-			slideBow.SetActive(true);
-			slideBow.transform.SetParent(null);
-			gameObject.transform.SetParent(slideBow.transform);
-			slideBow.GetComponent<Rigidbody>().useGravity = true;
+			OutGround();
+		}
+		else if (other.gameObject.CompareTag("GroundBalance"))
+		{
+			OutBalanceGround();
+			//OutGround();
 		}
 	}
 	public void GoForward()
@@ -90,5 +84,45 @@ public class Character : MonoBehaviour
 		{
 			slideBow.transform.position += Vector3.forward * speed * Time.deltaTime;
 		}
-    }
+	}
+
+	public void OutGround()
+	{
+		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease();
+		bowSkinnedMesh.SetActive(false);
+		animator.SetBool("isHanging", true);
+		isCharacterForward = false;
+		slideBow.SetActive(true);
+		slideBow.transform.SetParent(null);
+		gameObject.transform.SetParent(slideBow.transform);
+		slideBow.GetComponent<Rigidbody>().useGravity = true;
+	}
+
+	public void InGround()
+	{
+		isBalance = false;
+		FindObjectOfType<CharacterIKSystem>().IKBowWeightDecrease();
+		bowSkinnedMesh.SetActive(true);
+		animator.SetBool("isHanging", false);
+		isCharacterForward = true;
+		slideBow.SetActive(false);
+		gameObject.transform.SetParent(null);
+		slideBow.transform.SetParent(gameObject.transform);
+		slideBow.GetComponent<Rigidbody>().useGravity = false;
+	}
+
+	public void InBalanceGround()
+	{
+		isBalance = true;
+		animator.SetBool("isBalance", true);
+		speed = 2.5f;
+		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightIncrease();
+	}
+
+	public void OutBalanceGround()
+	{
+		animator.SetBool("isBalance", false);
+		speed = 5;
+		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightDecrease();
+	}
 }

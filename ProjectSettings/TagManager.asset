@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - AirObstacle
   - SlideStick
+  - GroundBalance
   layers:
   - Default
   - TransparentFX

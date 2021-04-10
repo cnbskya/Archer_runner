@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de07371707151344cb565e4cf82d8b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatingTextPrefab: {fileID: 75668466063275327, guid: 247e6b86ce1e0a246a9b91e1a71714f2,
+  bonusTextPrefab: {fileID: 9156703851300025945, guid: d8c136d0d8f6a1844a270ee238bf1070,
     type: 3}
 --- !u!64 &8823744296853108701
 MeshCollider:

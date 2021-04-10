@@ -5,19 +5,41 @@ using DG.Tweening;
 
 public class CharacterIKSystem : MonoBehaviour
 {
-    public Animator animator; 
-    [Range(0,1)]
-    public float rightHandPositionWeight;
-    [Range(0, 1)]
-    public float rightHandRotationWeight;
-    [Range(0, 1)]
-    public float leftHandPositionWeight;
-    [Range(0, 1)]
-    public float leftHandRotationWeight;
+    [Header("Variables")]
     public float duration;
-    [Header("IK Transforms")]
-    public Transform rightHandTransform;
-    public Transform leftHandTransform;
+    public Animator animator;
+
+    [Header("IK Bow Target Transforms")]
+    public Transform rightHandBowTransform;
+    public Transform leftHandBowTransform;
+
+    [Header("Bow Position & Rotation")]
+    [Range(0,1)]
+    public float rightBowPosition;
+    [Range(0, 1)]
+    public float rightBowRotation;
+    [Range(0, 1)]
+    public float leftBowPosition;
+    [Range(0, 1)]
+    public float leftBowRotation;
+    
+    // ****************************************
+
+    [Header("IK Balance Target Transforms")]
+    public Transform rightHandBalanceTransform;
+    public Transform leftHandBalanceTransform;
+
+    [Header("Balance Position & Rotation")]
+    [Range(0, 1)]
+    public float rightBalancePosition;
+    [Range(0, 1)]
+    public float rightBalanceRotation;
+    [Range(0, 1)]
+    public float leftBalancePosition;
+    [Range(0, 1)]
+    public float leftBalanceRotation;
+
+    // ****************************************
 
     private void Start()
 	{
@@ -26,29 +48,39 @@ public class CharacterIKSystem : MonoBehaviour
     
 	void OnAnimatorIK(int layerIndex)
     {
-        // Right Hand
-        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftHandPositionWeight);
-        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandRotationWeight);
-        animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandTransform.position);
-        animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandTransform.rotation);
+        // Right BOW Hand
+        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftBowPosition);
+        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftBowRotation);
+        animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandBowTransform.position);
+        animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandBowTransform.rotation);
 
-        //Left Hand
-        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandPositionWeight);
-        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandRotationWeight);
-        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTransform.position);
-        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTransform.rotation);
+        //Left BOW Hand
+        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightBowPosition);
+        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightBowRotation);
+        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandBowTransform.position);
+        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandBowTransform.rotation);
+
+        // Right Balance Hand
+        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftBalancePosition);
+        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftBalanceRotation);
+        animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandBalanceTransform.position);
+        animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandBalanceTransform.rotation);
+
+        //Left Balance Hand
+        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightBalancePosition);
+        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightBalanceRotation);
+        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandBalanceTransform.position);
+        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandBalanceTransform.rotation);
     }
-
     
-    public void IKWeightIncrease()
+    public void IKBowWeightIncrease()
 	{
-        DOTween.To(x => rightHandPositionWeight = x, 0f, 1f, duration);
-        DOTween.To(x => rightHandRotationWeight = x, 0f, 1f, duration);
-        DOTween.To(x => leftHandPositionWeight = x, 0f, 1f, duration);
-        DOTween.To(x => leftHandRotationWeight = x, 0f, 1f, duration);
+        DOTween.To(x => rightBowPosition = x, 0f, 1f, duration);
+        DOTween.To(x => rightBowRotation = x, 0f, 1f, duration);
+        DOTween.To(x => leftBowPosition = x, 0f, 1f, duration);
+        DOTween.To(x => leftBowRotation = x, 0f, 1f, duration);
     }
-
-    public void IKWeightDecrease()
+	public void IKBowWeightDecrease()
     {
         /*
         DOTween.To(x => rightHandPositionWeight = x, 1f, 0f, duration);
@@ -56,10 +88,25 @@ public class CharacterIKSystem : MonoBehaviour
         DOTween.To(x => leftHandPositionWeight = x, 1f, 0f, duration);
         DOTween.To(x => leftHandRotationWeight = x, 1f, 0f, duration);
         */
-        rightHandPositionWeight = 0;
-        rightHandRotationWeight = 0;
-        leftHandPositionWeight = 0;
-        leftHandRotationWeight = 0;
+        rightBowPosition = 0;
+        rightBowRotation = 0;
+        leftBowPosition = 0;
+        leftBowRotation = 0;
     }
 
+    public void IKBalanceWeightIncrease()
+	{
+        DOTween.To(x => rightBalancePosition = x, 0f, .5f, duration);
+        DOTween.To(x => rightBalanceRotation = x, 0f, .5f, duration);
+        DOTween.To(x => leftBalancePosition = x, 0f, .5f, duration);
+        DOTween.To(x => leftBalanceRotation = x, 0f, .5f, duration);
+    }
+
+    public void IKBalanceWeightDecrease()
+    {
+        DOTween.To(x => rightBalancePosition = x, .5f, 0f, duration - 0.5f);
+        DOTween.To(x => rightBalanceRotation = x, .5f, 0f, duration - 0.5f);
+        DOTween.To(x => leftBalancePosition = x, .5f, 0f, duration - 0.5f);
+        DOTween.To(x => leftBalanceRotation = x, .5f, 0f, duration- 0.5f);
+    }
 }
