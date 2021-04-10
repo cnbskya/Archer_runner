@@ -113,6 +113,7 @@ public class Character : MonoBehaviour
 
 	public void InBalanceGround()
 	{
+		StartCoroutine(BreakTheBalance());
 		isBalance = true;
 		animator.SetBool("isBalance", true);
 		speed = 2.5f;
@@ -124,5 +125,29 @@ public class Character : MonoBehaviour
 		animator.SetBool("isBalance", false);
 		speed = 5;
 		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightDecrease();
+	}
+
+	private IEnumerator BreakTheBalance() // İSSLİDE == TRUE İSE DENGEDE KALMA İŞLEMİ BAŞLIYOR HER TETİKLENDİĞİNDE RANDOM OLARAK SOL VEYA SAĞA DOĞRU TRANSFORM ALIYOR 
+	{
+		float elapsedTime = 0f;
+		float TempoSalita = 4f;
+		float LeftOrRight = Random.Range(0, 2);
+		yield return null;
+		while (elapsedTime < TempoSalita && isBalance == true)
+		{
+			if (LeftOrRight == 0)
+			{
+				transform.position = Vector3.Lerp(transform.position,
+				new Vector3(transform.position.x - 0.005f, transform.position.y, transform.position.z), (elapsedTime / TempoSalita));
+			}
+			else
+			{
+				transform.position = Vector3.Lerp(transform.position,
+				new Vector3(transform.position.x + 0.005f, transform.position.y, transform.position.z), (elapsedTime / TempoSalita));
+			}
+			elapsedTime += Time.deltaTime;
+
+			yield return null;
+		}
 	}
 }
