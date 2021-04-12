@@ -38,6 +38,7 @@ public class Character : MonoBehaviour
 		if (other.gameObject.CompareTag("GroundObstacle"))
 		{
 			animator.SetBool("groundReact", true);
+			Debug.Log("ground");
 			//animator.SetBool
 		}
 		else if (other.gameObject.CompareTag("AirObstacle"))
