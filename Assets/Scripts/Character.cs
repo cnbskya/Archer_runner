@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
 	public float speed;
 	public bool isCharacterForward;
 	public bool isBalance;
+	public bool isArena;
 
 	private void Start()
 	{
@@ -33,7 +34,7 @@ public class Character : MonoBehaviour
 	}
 	private void OnTriggerEnter(Collider other)
 	{
-		// ************ OBSTACLE *****************
+		// ************ OBSTACLE TRİGGERS ************
 		if (other.gameObject.CompareTag("GroundObstacle"))
 		{
 			animator.SetBool("groundReact", true);
@@ -49,23 +50,35 @@ public class Character : MonoBehaviour
 			blood.Play();
 			GameManager.instance.OnGameFinish();
 		}
+		// ************ GAMEPLAY TRİGGERS ************
 
 		if (other.gameObject.CompareTag("Ground")) // Ground ile tetiklenmişse
 		{
 			InGround();
-
 		}
 		else if (other.gameObject.CompareTag("GroundBalance"))
 		{
 			InBalanceGround();
 		}
+		else if (other.gameObject.CompareTag("Arena"))
+		{
+			InArena();
+		}
 	}
 	// GROUNDDAN AYRILINCA 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.CompareTag("Ground") && isBalance == false)
+		if (other.gameObject.CompareTag("Ground"))
 		{
-			OutGround();
+			if (isBalance == false && isArena)
+			{
+				OutArena();
+			}
+			// EĞER ARENAYLA ÇALIŞMAYACAK
+			else if (isBalance == false && !isArena)
+			{
+				OutGround();
+			}
 		}
 		else if (other.gameObject.CompareTag("GroundBalance"))
 		{
@@ -100,7 +113,6 @@ public class Character : MonoBehaviour
 
 	public void InGround()
 	{
-		isBalance = false;
 		FindObjectOfType<CharacterIKSystem>().IKBowWeightDecrease();
 		bowSkinnedMesh.SetActive(true);
 		animator.SetBool("isHanging", false);
@@ -110,18 +122,28 @@ public class Character : MonoBehaviour
 		slideBow.transform.SetParent(gameObject.transform);
 		slideBow.GetComponent<Rigidbody>().useGravity = false;
 	}
-
+	public void InArena()
+	{
+		isArena = true;
+	}
+	public void OutArena()
+	{
+		isArena = false;
+	}
 	public void InBalanceGround()
 	{
-		StartCoroutine(BreakTheBalance());
 		isBalance = true;
+		StartCoroutine(BreakTheBalance());
 		animator.SetBool("isBalance", true);
 		speed = 2.5f;
 		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightIncrease();
 	}
 
+
 	public void OutBalanceGround()
 	{
+		// BALANCEDEN DÜŞME KISMI BURASI OLACAK YAPILACAK - KARAKTERİN HIZI SIFIRLANCAK VE KAMERA TAKİP ETMEYECEK KARAKTER IK WEİGHT DEĞERLERİ SIFIRLANCAK YİNE
+		isBalance = false;
 		animator.SetBool("isBalance", false);
 		speed = 5;
 		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightDecrease();
