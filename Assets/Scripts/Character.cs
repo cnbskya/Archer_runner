@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
 	public bool isCharacterForward;
 	public bool isBalance;
 	public bool isArena;
+	public bool inGround;
 
 	private void Start()
 	{
@@ -55,6 +56,7 @@ public class Character : MonoBehaviour
 		if (other.gameObject.CompareTag("Ground")) // Ground ile tetiklenmişse
 		{
 			InGround();
+			FindObjectOfType<CharacterIKSystem>().IKBalanceWeightDecrease();
 		}
 		else if (other.gameObject.CompareTag("GroundBalance"))
 		{
@@ -63,6 +65,7 @@ public class Character : MonoBehaviour
 		else if (other.gameObject.CompareTag("Arena"))
 		{
 			InArena();
+
 		}
 	}
 	// GROUNDDAN AYRILINCA 
@@ -80,12 +83,13 @@ public class Character : MonoBehaviour
 				OutGround();
 			}
 		}
-		else if (other.gameObject.CompareTag("GroundBalance"))
+		else if (other.gameObject.CompareTag("GroundBalance") && inGround == false)
 		{
 			OutBalanceGround();
 			//OutGround();
 		}
 	}
+
 	public void GoForward()
 	{
 		if (isCharacterForward)
@@ -101,6 +105,8 @@ public class Character : MonoBehaviour
 
 	public void OutGround()
 	{
+		inGround = false;
+		Debug.Log("OutGround");
 		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease();
 		bowSkinnedMesh.SetActive(false);
 		animator.SetBool("isHanging", true);
@@ -113,9 +119,15 @@ public class Character : MonoBehaviour
 
 	public void InGround()
 	{
+		//Bool control
+		inGround = true;
+		isBalance = false;
+		animator.SetBool("isBalance", false);
+		animator.SetBool("isHanging", false);
+		speed = 5;
+
 		FindObjectOfType<CharacterIKSystem>().IKBowWeightDecrease();
 		bowSkinnedMesh.SetActive(true);
-		animator.SetBool("isHanging", false);
 		isCharacterForward = true;
 		slideBow.SetActive(false);
 		gameObject.transform.SetParent(null);
@@ -132,7 +144,9 @@ public class Character : MonoBehaviour
 	}
 	public void InBalanceGround()
 	{
+		Debug.Log("InBalanceGround");
 		isBalance = true;
+		inGround = false;
 		StartCoroutine(BreakTheBalance());
 		animator.SetBool("isBalance", true);
 		speed = 2.5f;
@@ -142,11 +156,13 @@ public class Character : MonoBehaviour
 
 	public void OutBalanceGround()
 	{
+		Debug.Log("OutBalanceGround");
 		// BALANCEDEN DÜŞME KISMI BURASI OLACAK YAPILACAK - KARAKTERİN HIZI SIFIRLANCAK VE KAMERA TAKİP ETMEYECEK KARAKTER IK WEİGHT DEĞERLERİ SIFIRLANCAK YİNE
-		isBalance = false;
-		animator.SetBool("isBalance", false);
-		speed = 5;
-		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightDecrease();
+
+		speed = 0;
+		
+
+		
 	}
 
 	private IEnumerator BreakTheBalance() // İSSLİDE == TRUE İSE DENGEDE KALMA İŞLEMİ BAŞLIYOR HER TETİKLENDİĞİNDE RANDOM OLARAK SOL VEYA SAĞA DOĞRU TRANSFORM ALIYOR 
