@@ -15,8 +15,11 @@ public class MainCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DefaultOffset = new Vector3(0, 4, -4);
-        CameraRePosition(DefaultOffset);
+        if (GameManager.instance.isGameOn)
+        {
+            DefaultOffset = new Vector3(0, 4, -4);
+            CameraRePosition(DefaultOffset);
+        }
     }
 
     public void CameraRePosition(Vector3 DefaultOffset)
