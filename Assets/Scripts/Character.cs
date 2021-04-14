@@ -9,6 +9,8 @@ public class Character : MonoBehaviour
 	public GameObject character;
 	public GameObject slideBow;
 	public GameObject bowSkinnedMesh;
+	public Collider[] allColliders;
+	public Collider mainCollider;
 	Rigidbody rb;
 	public Animator animator;
 	public ParticleSystem blood;
@@ -20,6 +22,12 @@ public class Character : MonoBehaviour
 	public bool isArena;
 	public bool inGround;
 
+	private void Awake()
+	{
+		mainCollider = GetComponent<Collider>();
+		allColliders = GetComponentsInChildren<Collider>(true);
+		DoRagdoll(false);
+	}
 	private void Start()
 	{
 		rb = gameObject.GetComponent<Rigidbody>();
@@ -106,6 +114,8 @@ public class Character : MonoBehaviour
 	public void OutGround()
 	{
 		inGround = false;
+		slideBow.GetComponent<Collider>().enabled = true;
+		slideBow.GetComponent<Rigidbody>().isKinematic = false;
 		Debug.Log("OutGround");
 		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease();
 		bowSkinnedMesh.SetActive(false);
@@ -158,13 +168,23 @@ public class Character : MonoBehaviour
 	{
 		Debug.Log("OutBalanceGround");
 		// BALANCEDEN DÜŞME KISMI BURASI OLACAK YAPILACAK - KARAKTERİN HIZI SIFIRLANCAK VE KAMERA TAKİP ETMEYECEK KARAKTER IK WEİGHT DEĞERLERİ SIFIRLANCAK YİNE
-
 		speed = 0;
-		
-
-		
+		DoRagdoll(true);
+		Destroy(GetComponent<Animator>());
+		GameManager.instance.isGameOn = false;
 	}
-
+	public void DoRagdoll(bool isRagdoll)
+	{
+		foreach (var col in allColliders)
+		{
+			col.enabled = isRagdoll;
+			col.GetComponent<Rigidbody>().useGravity = isRagdoll;
+			col.GetComponent<Rigidbody>().isKinematic = !isRagdoll;
+		}
+		mainCollider.enabled = !isRagdoll;
+		GetComponent<Rigidbody>().useGravity = isRagdoll;
+		GetComponent<Animator>().enabled = !isRagdoll;
+	}
 	private IEnumerator BreakTheBalance() // İSSLİDE == TRUE İSE DENGEDE KALMA İŞLEMİ BAŞLIYOR HER TETİKLENDİĞİNDE RANDOM OLARAK SOL VEYA SAĞA DOĞRU TRANSFORM ALIYOR 
 	{
 		float elapsedTime = 0f;
