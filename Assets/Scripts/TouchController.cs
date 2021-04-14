@@ -26,22 +26,14 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 	}
 	public void ChooseTarget()
 	{
-		if (GameManager.instance.isGameOn)
+		if (FindObjectOfType<Character>().isCharacterForward)
 		{
-			if (FindObjectOfType<Character>().isCharacterForward)
-			{
-				runn_e = character.transform;
-			}
-			else
-			{
-				runn_e = slideBow.transform;
-			}
+			runn_e = character.transform;
 		}
 		else
 		{
-			runn_e = null;
+			runn_e = slideBow.transform;
 		}
-		
 	}
 	public void OnDrag(PointerEventData eventData)
 	{
@@ -56,12 +48,8 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 		Vector2 difVec = eventData.position - moveLastPos;
 
 		//MOVEMENT
-		if(runn_e != null)
-		{
-			runn_e.localPosition += new Vector3(difVec.x, 0f, 0f) * moveSensitivity;
-			moveLastPos = eventData.position;
-		}
-		
+		runn_e.localPosition += new Vector3(difVec.x, 0f, 0f) * moveSensitivity;
+		moveLastPos = eventData.position;
 
 		//CLAMP
 		Clamp();
@@ -84,12 +72,8 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
 	public void Clamp()
 	{
-		if(runn_e != null)
-		{
-			Vector3 clampedPos = runn_e.localPosition;
-			clampedPos.x = Mathf.Clamp(clampedPos.x, minClampTr.localPosition.x, maxClampTr.localPosition.x);
-			runn_e.localPosition = clampedPos;
-		}
-		
+		Vector3 clampedPos = runn_e.localPosition;
+		clampedPos.x = Mathf.Clamp(clampedPos.x, minClampTr.localPosition.x, maxClampTr.localPosition.x);
+		runn_e.localPosition = clampedPos;
 	}
 }

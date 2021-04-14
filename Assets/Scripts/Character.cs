@@ -142,17 +142,11 @@ public class Character : MonoBehaviour
 
 	public void OutBalanceGround()
 	{
-
 		// BALANCEDEN DÜŞME KISMI BURASI OLACAK YAPILACAK - KARAKTERİN HIZI SIFIRLANCAK VE KAMERA TAKİP ETMEYECEK KARAKTER IK WEİGHT DEĞERLERİ SIFIRLANCAK YİNE
-		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease();
-		if (isBalance)
-		{
-			speed = 0;
-			rb.useGravity = true;
-			GameManager.instance.isGameOn = false;
-			animator.SetBool("isFalling", true);
-		}
-		
+		isBalance = false;
+		animator.SetBool("isBalance", false);
+		speed = 5;
+		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightDecrease();
 	}
 
 	private IEnumerator BreakTheBalance() // İSSLİDE == TRUE İSE DENGEDE KALMA İŞLEMİ BAŞLIYOR HER TETİKLENDİĞİNDE RANDOM OLARAK SOL VEYA SAĞA DOĞRU TRANSFORM ALIYOR 
