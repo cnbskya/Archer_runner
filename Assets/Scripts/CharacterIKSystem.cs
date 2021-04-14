@@ -82,31 +82,26 @@ public class CharacterIKSystem : MonoBehaviour
     }
 	public void IKBowWeightDecrease()
     {
-        /*
-        DOTween.To(x => rightHandPositionWeight = x, 1f, 0f, duration);
-        DOTween.To(x => rightHandRotationWeight = x, 1f, 0f, duration);
-        DOTween.To(x => leftHandPositionWeight = x, 1f, 0f, duration);
-        DOTween.To(x => leftHandRotationWeight = x, 1f, 0f, duration);
-        */
-        rightBowPosition = 0;
-        rightBowRotation = 0;
-        leftBowPosition = 0;
-        leftBowRotation = 0;
+        
+        DOTween.To(x => rightBowPosition = x, rightBowPosition, 0f, duration);
+        DOTween.To(x => rightBowRotation = x, rightBowRotation, 0f, duration);
+        DOTween.To(x => leftBowPosition = x, leftBowPosition, 0f, duration);
+        DOTween.To(x => leftBowRotation = x, leftBowRotation, 0f, duration);
     }
 
     public void IKBalanceWeightIncrease()
 	{
-        DOTween.To(x => rightBalancePosition = x, 0f, .5f, duration);
-        DOTween.To(x => rightBalanceRotation = x, 0f, .5f, duration);
-        DOTween.To(x => leftBalancePosition = x, 0f, .5f, duration);
-        DOTween.To(x => leftBalanceRotation = x, 0f, .5f, duration);
+        DOTween.To(x => rightBalancePosition = x, rightBalancePosition, .5f, duration);
+        DOTween.To(x => rightBalanceRotation = x, rightBalanceRotation, .5f, duration);
+        DOTween.To(x => leftBalancePosition = x, leftBalancePosition, .5f, duration);
+        DOTween.To(x => leftBalanceRotation = x, leftBalanceRotation, .5f, duration);
     }
 
     public void IKBalanceWeightDecrease()
     {
-        DOTween.To(x => rightBalancePosition = x, .5f, 0f, duration - 0.5f);
-        DOTween.To(x => rightBalanceRotation = x, .5f, 0f, duration - 0.5f);
-        DOTween.To(x => leftBalancePosition = x, .5f, 0f, duration - 0.5f);
-        DOTween.To(x => leftBalanceRotation = x, .5f, 0f, duration- 0.5f);
+        DOTween.To(x => rightBalancePosition = x, rightBalancePosition, 0f, duration);
+        DOTween.To(x => rightBalanceRotation = x, rightBalanceRotation, 0f, duration);
+        DOTween.To(x => leftBalancePosition = x, leftBalancePosition, 0f, duration);
+        DOTween.To(x => leftBalanceRotation = x, leftBalanceRotation, 0f, duration);
     }
 }

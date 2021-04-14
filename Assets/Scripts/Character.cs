@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
 	public GameObject bowSkinnedMesh;
 	public Collider[] allColliders;
 	public Collider mainCollider;
-	Rigidbody rb;
+	[SerializeField] Rigidbody rb;
 	public Animator animator;
 	public ParticleSystem blood;
 
@@ -59,8 +59,9 @@ public class Character : MonoBehaviour
 			blood.Play();
 			GameManager.instance.OnGameFinish();
 		}
-		// ************ GAMEPLAY TRİGGERS ************
 
+
+		// ************ GAMEPLAY TRİGGERS ************
 		if (other.gameObject.CompareTag("Ground")) // Ground ile tetiklenmişse
 		{
 			InGround();
@@ -76,17 +77,16 @@ public class Character : MonoBehaviour
 
 		}
 	}
-	// GROUNDDAN AYRILINCA 
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.CompareTag("Ground"))
 		{
-			if (isBalance == false && isArena)
+			if (!isBalance && isArena)
 			{
 				OutArena();
 			}
-			// EĞER ARENAYLA ÇALIŞMAYACAK
-			else if (isBalance == false && !isArena)
+			// EĞER ARENAYSA ÇALIŞMAYACAK
+			else if (!isBalance && !isArena)
 			{
 				OutGround();
 			}
@@ -94,39 +94,23 @@ public class Character : MonoBehaviour
 		else if (other.gameObject.CompareTag("GroundBalance") && inGround == false)
 		{
 			OutBalanceGround();
-			//OutGround();
 		}
 	}
-
-	public void GoForward()
-	{
-		if (isCharacterForward)
-		{
-			gameObject.transform.position += Vector3.forward * speed * Time.deltaTime; // Change Forward positions
-			animator.SetBool("isRunning", true); // Running animation start.
-		}
-		else
-		{
-			slideBow.transform.position += Vector3.forward * speed * Time.deltaTime;
-		}
-	}
+	
 
 	public void OutGround()
 	{
 		inGround = false;
-		slideBow.GetComponent<Collider>().enabled = true;
-		slideBow.GetComponent<Rigidbody>().isKinematic = false;
 		Debug.Log("OutGround");
-		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease();
-		bowSkinnedMesh.SetActive(false);
-		animator.SetBool("isHanging", true);
-		isCharacterForward = false;
-		slideBow.SetActive(true);
+		// DEĞİŞİM İÇİN BOW VE CHARACTER ÜZERİNDE YAPILAN İŞLEMLER
+		OutGroundParetChanged(true);
+		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease(); // IK POSİTİON LERP İŞLEMİ
+		// PARENT DEĞİŞİM İŞLEMLERİ 
 		slideBow.transform.SetParent(null);
 		gameObject.transform.SetParent(slideBow.transform);
-		slideBow.GetComponent<Rigidbody>().useGravity = true;
+		
 	}
-
+	
 	public void InGround()
 	{
 		//Bool control
@@ -135,23 +119,17 @@ public class Character : MonoBehaviour
 		animator.SetBool("isBalance", false);
 		animator.SetBool("isHanging", false);
 		speed = 5;
-
 		FindObjectOfType<CharacterIKSystem>().IKBowWeightDecrease();
+
 		bowSkinnedMesh.SetActive(true);
 		isCharacterForward = true;
 		slideBow.SetActive(false);
+
 		gameObject.transform.SetParent(null);
 		slideBow.transform.SetParent(gameObject.transform);
 		slideBow.GetComponent<Rigidbody>().useGravity = false;
 	}
-	public void InArena()
-	{
-		isArena = true;
-	}
-	public void OutArena()
-	{
-		isArena = false;
-	}
+	
 	public void InBalanceGround()
 	{
 		Debug.Log("InBalanceGround");
@@ -163,7 +141,6 @@ public class Character : MonoBehaviour
 		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightIncrease();
 	}
 
-
 	public void OutBalanceGround()
 	{
 		Debug.Log("OutBalanceGround");
@@ -172,6 +149,36 @@ public class Character : MonoBehaviour
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
 		GameManager.instance.isGameOn = false;
+	}
+	public void InArena()
+	{
+		isArena = true;
+	}
+	public void OutArena()
+	{
+		isArena = false;
+	}
+	public void OutGroundParetChanged(bool isTrue)
+	{
+		bowSkinnedMesh.SetActive(!isTrue);
+		slideBow.GetComponent<Collider>().enabled = isTrue;
+		slideBow.GetComponent<Rigidbody>().isKinematic = !isTrue;
+		slideBow.GetComponent<Rigidbody>().useGravity = isTrue;
+		animator.SetBool("isHanging", isTrue);
+		isCharacterForward = !isTrue;
+		slideBow.SetActive(isTrue);
+	}
+	public void GoForward()
+	{
+		if (isCharacterForward)
+		{
+			gameObject.transform.position += Vector3.forward * speed * Time.deltaTime; // Change Forward positions
+			animator.SetBool("isRunning", true); // Running animation start.
+		}
+		else
+		{
+			slideBow.transform.position += Vector3.forward * speed * Time.deltaTime;
+		}
 	}
 	public void DoRagdoll(bool isRagdoll)
 	{
