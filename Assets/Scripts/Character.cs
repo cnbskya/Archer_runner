@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
 		rb = gameObject.GetComponent<Rigidbody>();
 		animator.enabled = false;
 	}
-	void Update()
+	void FixedUpdate()
 	{
 		if (GameManager.instance.isGameOn)
 		{
