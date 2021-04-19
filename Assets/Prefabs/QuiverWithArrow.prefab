@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de07371707151344cb565e4cf82d8b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusTextPrefab: {fileID: 9156703851300025945, guid: d8c136d0d8f6a1844a270ee238bf1070,
+  bonusTextPrefab: {fileID: 402981557615669768, guid: 46cc9570c66c8bf40a9bc13a0d4fb375,
     type: 3}
+  arrowCount: 0
 --- !u!64 &8823744296853108701
 MeshCollider:
   m_ObjectHideFlags: 0

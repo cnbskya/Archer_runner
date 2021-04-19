@@ -60,7 +60,6 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 			moveLastPos = eventData.position;
 		}
 		
-
 		//CLAMP
 		Clamp();
 	}

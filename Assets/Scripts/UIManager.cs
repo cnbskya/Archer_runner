@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour
 {
 	public static UIManager instance;
 	public GameObject startGamePanel;
-	//public GameObject topUI;
+	public GameObject inGameUI;
 	//public GameObject endGamePanel;
 
 	private void Awake()
@@ -17,9 +17,9 @@ public class UIManager : MonoBehaviour
 	public void StartedScreenUI()
 	{
 		startGamePanel.SetActive(false);
-		//topUI.SetActive(true);
+		inGameUI.SetActive(true);
 	}
-	
+
 	public void FinishScreenUI()
 	{
 		//topUI.SetActive(false);

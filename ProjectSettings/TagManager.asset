@@ -13,6 +13,7 @@ TagManager:
   - SlideStick
   - GroundBalance
   - Arena
+  - FinishLine
   layers:
   - Default
   - TransparentFX

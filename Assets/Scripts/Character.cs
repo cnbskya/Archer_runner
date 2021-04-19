@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
 	public GameObject character;
 	public GameObject slideBow;
 	public GameObject bowSkinnedMesh;
+	public GameObject shootPos;
 	public Collider[] allColliders;
 	public Collider mainCollider;
 	[SerializeField] Rigidbody rb;
@@ -16,6 +17,7 @@ public class Character : MonoBehaviour
 	public ParticleSystem blood;
 
 	[Header("Variables")]
+	public int arrowCount = 0;
 	public float speed;
 	public bool isCharacterForward;
 	public bool isBalance;
@@ -33,7 +35,7 @@ public class Character : MonoBehaviour
 		rb = gameObject.GetComponent<Rigidbody>();
 		animator.enabled = false;
 	}
-	void FixedUpdate()
+	void Update()
 	{
 		if (GameManager.instance.isGameOn)
 		{
@@ -59,6 +61,15 @@ public class Character : MonoBehaviour
 			blood.Play();
 			GameManager.instance.OnGameFinish();
 		}
+		else if (other.gameObject.CompareTag("Quiver"))
+		{
+			arrowCount++;
+		}
+		else if (other.gameObject.CompareTag("FinishLine"))
+		{
+			speed = 0;
+			animator.SetBool("isFinish", true);
+		}
 
 
 		// ************ GAMEPLAY TRİGGERS ************
@@ -74,7 +85,6 @@ public class Character : MonoBehaviour
 		else if (other.gameObject.CompareTag("Arena"))
 		{
 			InArena();
-
 		}
 	}
 	private void OnTriggerExit(Collider other)
@@ -96,8 +106,14 @@ public class Character : MonoBehaviour
 			OutBalanceGround();
 		}
 	}
-	
-
+	public void InArena()
+	{
+		isArena = true;
+	}
+	public void OutArena()
+	{
+		isArena = false;
+	}
 	public void OutGround()
 	{
 		inGround = false;
@@ -105,12 +121,11 @@ public class Character : MonoBehaviour
 		// DEĞİŞİM İÇİN BOW VE CHARACTER ÜZERİNDE YAPILAN İŞLEMLER
 		OutGroundParetChanged(true);
 		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease(); // IK POSİTİON LERP İŞLEMİ
-		// PARENT DEĞİŞİM İŞLEMLERİ 
+																	 // PARENT DEĞİŞİM İŞLEMLERİ 
 		slideBow.transform.SetParent(null);
 		gameObject.transform.SetParent(slideBow.transform);
-		
+
 	}
-	
 	public void InGround()
 	{
 		//Bool control
@@ -129,7 +144,6 @@ public class Character : MonoBehaviour
 		slideBow.transform.SetParent(gameObject.transform);
 		slideBow.GetComponent<Rigidbody>().useGravity = false;
 	}
-	
 	public void InBalanceGround()
 	{
 		Debug.Log("InBalanceGround");
@@ -140,7 +154,6 @@ public class Character : MonoBehaviour
 		speed = 2.5f;
 		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightIncrease();
 	}
-
 	public void OutBalanceGround()
 	{
 		Debug.Log("OutBalanceGround");
@@ -149,14 +162,6 @@ public class Character : MonoBehaviour
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
 		GameManager.instance.isGameOn = false;
-	}
-	public void InArena()
-	{
-		isArena = true;
-	}
-	public void OutArena()
-	{
-		isArena = false;
 	}
 	public void OutGroundParetChanged(bool isTrue)
 	{
