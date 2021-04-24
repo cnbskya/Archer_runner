@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
 	public GameObject character;
 	public GameObject slideBow;
 	public GameObject bowSkinnedMesh;
-	public GameObject shootPos;
+	public GameObject trejectory;
 	public Collider[] allColliders;
 	public Collider mainCollider;
 	[SerializeField] Rigidbody rb;
@@ -19,10 +19,12 @@ public class Character : MonoBehaviour
 	[Header("Variables")]
 	public int arrowCount = 0;
 	public float speed;
+	public float shootDelay = 2f;
 	public bool isCharacterForward;
 	public bool isBalance;
 	public bool isArena;
 	public bool inGround;
+
 
 	private void Awake()
 	{
@@ -109,6 +111,9 @@ public class Character : MonoBehaviour
 	public void InArena()
 	{
 		isArena = true;
+		speed = 0;
+		animator.SetBool("arenaIdle", true);
+		StartCoroutine(ToDoInArena());
 	}
 	public void OutArena()
 	{
@@ -180,10 +185,8 @@ public class Character : MonoBehaviour
 			gameObject.transform.position += Vector3.forward * speed * Time.deltaTime; // Change Forward positions
 			animator.SetBool("isRunning", true); // Running animation start.
 		}
-		else
-		{
-			slideBow.transform.position += Vector3.forward * speed * Time.deltaTime;
-		}
+		else slideBow.transform.position += Vector3.forward * speed * Time.deltaTime;
+		
 	}
 	public void DoRagdoll(bool isRagdoll)
 	{
@@ -220,4 +223,13 @@ public class Character : MonoBehaviour
 			yield return null;
 		}
 	}
+
+	private IEnumerator ToDoInArena()
+	{
+		yield return new WaitForSeconds(shootDelay);
+		animator.SetBool("isArena", true);
+		GameManager.instance.İsSwipePanelActive(true);
+		trejectory.SetActive(true);
+	}
+
 }

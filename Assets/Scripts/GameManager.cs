@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
 	public GameObject touchPanel;
+	public GameObject swipePanel;
 	public bool isGameOn;
 	private void Awake()
 	{
@@ -23,5 +24,17 @@ public class GameManager : MonoBehaviour
 		touchPanel.SetActive(false);
 	}
 
-
+	public void İsSwipePanelActive(bool isSwipe)
+	{
+		if (isSwipe)
+		{
+			swipePanel.SetActive(isSwipe);
+			touchPanel.SetActive(!isSwipe);
+		}
+		else
+		{
+			swipePanel.SetActive(!isSwipe);
+			touchPanel.SetActive(isSwipe);
+		}
+	}
 }
