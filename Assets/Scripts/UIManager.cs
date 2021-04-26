@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 	public GameObject startGamePanel;
 	public GameObject inGameUI;
 	public GameObject endGamePanel;
+	public GameObject swipePanel;
 
 	private void Awake()
 	{
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(1.6f);
 		inGameUI.SetActive(false);
+		swipePanel.SetActive(true);
 		endGamePanel.SetActive(true);
 	}
 

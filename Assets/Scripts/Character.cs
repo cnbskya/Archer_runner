@@ -166,7 +166,7 @@ public class Character : MonoBehaviour
 		speed = 0;
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
-		GameManager.instance.isGameOn = false;
+		GameManager.instance.OnGameFinish();
 	}
 	public void OutGroundParetChanged(bool isTrue)
 	{
@@ -237,7 +237,7 @@ public class Character : MonoBehaviour
 		yield return new WaitForSeconds(0.4f);
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
-		GameManager.instance.isGameOn = false;
+		GameManager.instance.OnGameFinish();
 	}
 
 }
