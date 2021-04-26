@@ -28,7 +28,6 @@ public class EnemyController : MonoBehaviour
             float distance = Vector3.Distance(character.transform.position, transform.position);
             if (distance <= lookRadius)
             {
-                Debug.Log("Aradaki mesafe sağlandı ve karakter arenaya girdi, animasyon başladı");
                 StartCoroutine(ToDoEnemy(distance));
             }
         }
@@ -67,10 +66,11 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("isWalking", true);
             FaceTarget();
         }
-		else if (distance <= 5f)
+		else if (distance <= 5f) 
 		{
             anim.SetBool("isSword", true);
-            StartCoroutine(FindObjectOfType<Character>().InArenaDead()); // Character animation ended and dead, 
+            StartCoroutine(FindObjectOfType<Character>().InArenaDead()); // Character animation ended and dead,
+            GameManager.instance.OnGameFinish();
         }
 
     }

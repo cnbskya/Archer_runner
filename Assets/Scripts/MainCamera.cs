@@ -8,13 +8,6 @@ public class MainCamera : MonoBehaviour
 	public GameObject rotatingObject;
 	public float smoothSpeed;
 	public Vector3 DefaultOffset;
-	void Start()
-	{
-
-	}
-
-
-	// Update is called once per frame
 	void Update()
 	{
 		if (GameManager.instance.isGameOn)

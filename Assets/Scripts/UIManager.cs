@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.Collections;
+
 public class UIManager : MonoBehaviour
 {
 	public static UIManager instance;
 	public GameObject startGamePanel;
 	public GameObject inGameUI;
-	//public GameObject endGamePanel;
+	public GameObject endGamePanel;
 
 	private void Awake()
 	{
@@ -20,10 +22,11 @@ public class UIManager : MonoBehaviour
 		inGameUI.SetActive(true);
 	}
 
-	public void FinishScreenUI()
+	public IEnumerator FinishScreenUI()
 	{
-		//topUI.SetActive(false);
-		//endGamePanel.SetActive(true);
+		yield return new WaitForSeconds(1.6f);
+		inGameUI.SetActive(false);
+		endGamePanel.SetActive(true);
 	}
 
 	public void RestartGame()

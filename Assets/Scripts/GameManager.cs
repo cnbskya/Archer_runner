@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 	{
 		isGameOn = false;
 		touchPanel.SetActive(false);
+		StartCoroutine(UIManager.instance.FinishScreenUI());
+
 	}
 
 	public void İsSwipePanelActive(bool isSwipe)
@@ -36,5 +38,11 @@ public class GameManager : MonoBehaviour
 			swipePanel.SetActive(!isSwipe);
 			touchPanel.SetActive(isSwipe);
 		}
+	}
+
+	public void RestartGame()
+	{
+		Debug.Log("SampleScene Restart");
+		SceneManager.LoadScene("SampleScene");
 	}
 }
