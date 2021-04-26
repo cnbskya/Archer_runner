@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 10f;
     public Animator anim;
-    public Transform character;
+    public GameObject character;
     NavMeshAgent agent;
     void Start()
     {
@@ -22,16 +22,21 @@ public class EnemyController : MonoBehaviour
         bool isArena = FindObjectOfType<Character>().isArena;
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
 
-        float distance = Vector3.Distance(character.position, transform.position);
-		if (distance <= lookRadius && isArena)
+		if (isArena)
 		{
-            Debug.Log("Aradaki mesafe sağlandı ve karakter arenaya girdi, animasyon başladı");
-            StartCoroutine(ToDoEnemy(distance));
-		}
+            character = GameObject.Find("Character");
+            float distance = Vector3.Distance(character.transform.position, transform.position);
+            if (distance <= lookRadius)
+            {
+                Debug.Log("Aradaki mesafe sağlandı ve karakter arenaya girdi, animasyon başladı");
+                StartCoroutine(ToDoEnemy(distance));
+            }
+        }
+        
     }
     void FaceTarget()
 	{
-        Vector3 direction = (character.position - transform.position).normalized;
+        Vector3 direction = (character.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 15f);
 	}
@@ -42,12 +47,12 @@ public class EnemyController : MonoBehaviour
 	}
     void EnemyRandomSpeed()
 	{
-        GetComponent<NavMeshAgent>().speed = Random.Range(1f, 3f); // 1,2
+        GetComponent<NavMeshAgent>().speed = Random.Range(1f, 2.2f); // 1f,2.2f
         if(GetComponent<NavMeshAgent>().speed < 2f)
 		{
             transform.GetChild(0).GetComponent<Animator>().speed = 1;
 		}
-		else if (GetComponent<NavMeshAgent>().speed >= 2f && GetComponent<NavMeshAgent>().speed <= 3f)
+		else if (GetComponent<NavMeshAgent>().speed >= 2f && GetComponent<NavMeshAgent>().speed <= 2.2f)
 		{
             transform.GetChild(0).GetComponent<Animator>().speed = 1.2f;
         }
@@ -56,13 +61,17 @@ public class EnemyController : MonoBehaviour
     IEnumerator ToDoEnemy(float distance)
 	{
         yield return new WaitForSeconds(FindObjectOfType<Character>().shootDelay);
-        agent.SetDestination(character.position);
-        anim.SetBool("isWalking", true);
-
-        if (distance <= agent.stoppingDistance)
+        agent.SetDestination(character.transform.position);
+        if (distance > 5f)
         {
-            // SALDIRMA İŞLEMİ BURADA YAPILABİLİR
+            anim.SetBool("isWalking", true);
             FaceTarget();
         }
+		else if (distance <= 5f)
+		{
+            anim.SetBool("isSword", true);
+            StartCoroutine(FindObjectOfType<Character>().InArenaDead()); // Character animation ended and dead, 
+        }
+
     }
 }

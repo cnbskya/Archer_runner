@@ -7,11 +7,6 @@ public class ArrowText : MonoBehaviour
 {
     public Transform character;
     public Text scoreText;
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

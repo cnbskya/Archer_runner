@@ -72,8 +72,6 @@ public class Character : MonoBehaviour
 			speed = 0;
 			animator.SetBool("isFinish", true);
 		}
-
-
 		// ************ GAMEPLAY TRİGGERS ************
 		if (other.gameObject.CompareTag("Ground")) // Ground ile tetiklenmişse
 		{
@@ -105,14 +103,17 @@ public class Character : MonoBehaviour
 		}
 		else if (other.gameObject.CompareTag("GroundBalance") && inGround == false)
 		{
-			OutBalanceGround();
+			OutBalanceAndDead();
 		}
 	}
+	[ContextMenu("InArena")]
 	public void InArena()
 	{
 		isArena = true;
 		speed = 0;
 		animator.SetBool("arenaIdle", true);
+		// ENEMY SPAWN VE HAREKET İŞLEMLERİ ÇAĞIRILIYOR.
+		StartCoroutine(FindObjectOfType<RandomEnemySpawner>().EnemyDrop());
 		StartCoroutine(ToDoInArena());
 	}
 	public void OutArena()
@@ -159,10 +160,9 @@ public class Character : MonoBehaviour
 		speed = 2.5f;
 		FindObjectOfType<CharacterIKSystem>().IKBalanceWeightIncrease();
 	}
-	public void OutBalanceGround()
+	public void OutBalanceAndDead()
 	{
 		Debug.Log("OutBalanceGround");
-		// BALANCEDEN DÜŞME KISMI BURASI OLACAK YAPILACAK - KARAKTERİN HIZI SIFIRLANCAK VE KAMERA TAKİP ETMEYECEK KARAKTER IK WEİGHT DEĞERLERİ SIFIRLANCAK YİNE
 		speed = 0;
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
@@ -198,7 +198,9 @@ public class Character : MonoBehaviour
 		}
 		mainCollider.enabled = !isRagdoll;
 		GetComponent<Rigidbody>().useGravity = isRagdoll;
-		GetComponent<Animator>().enabled = !isRagdoll;
+
+		if (GetComponent<Animator>() != null)
+			GetComponent<Animator>().enabled = !isRagdoll;
 	}
 	private IEnumerator BreakTheBalance() // İSSLİDE == TRUE İSE DENGEDE KALMA İŞLEMİ BAŞLIYOR HER TETİKLENDİĞİNDE RANDOM OLARAK SOL VEYA SAĞA DOĞRU TRANSFORM ALIYOR 
 	{
@@ -223,13 +225,19 @@ public class Character : MonoBehaviour
 			yield return null;
 		}
 	}
-
 	private IEnumerator ToDoInArena()
 	{
+		GameManager.instance.İsSwipePanelActive(true);
 		yield return new WaitForSeconds(shootDelay);
 		animator.SetBool("isArena", true);
-		GameManager.instance.İsSwipePanelActive(true);
 		trejectory.SetActive(true);
+	}
+	public IEnumerator InArenaDead()
+	{
+		yield return new WaitForSeconds(0.4f);
+		DoRagdoll(true);
+		Destroy(GetComponent<Animator>());
+		GameManager.instance.isGameOn = false;
 	}
 
 }
