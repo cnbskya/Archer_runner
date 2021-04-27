@@ -33,7 +33,6 @@ public class SwipeController : MonoBehaviour, IPointerDownHandler, IDragHandler,
                 Vector3 pos = new Vector3(character.eulerAngles.x, character.eulerAngles.y, character.eulerAngles.z);
                 pos += Vector3.up * distanceVal.x * SwipeSensitivity;
                 character.eulerAngles = pos;
-               
             }
             else // VERTİCAL MOVEMENT
             {

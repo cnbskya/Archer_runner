@@ -72,6 +72,5 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(FindObjectOfType<Character>().InArenaDead()); // Character animation ended and dead,
             GameManager.instance.OnGameFinish();
         }
-
     }
 }

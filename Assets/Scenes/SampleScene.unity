@@ -153,6 +153,7 @@ MonoBehaviour:
   startGamePanel: {fileID: 578695596}
   inGameUI: {fileID: 413242413}
   endGamePanel: {fileID: 906947347}
+  swipePanel: {fileID: 208508241}
 --- !u!4 &36937
 Transform:
   m_ObjectHideFlags: 0
@@ -4305,7 +4306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.2164396, y: -0, z: -0, w: 0.97629607}
-  m_LocalPosition: {x: 0, y: 3.9999998, z: -4}
+  m_LocalPosition: {x: 0, y: -3.3000004, z: 125.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5813,7 +5814,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395675807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.135, y: 1.3210001, z: 0.8549957}
+  m_LocalPosition: {x: 0.15, y: 1.3210001, z: 0.8549957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 625271636}
@@ -5847,7 +5848,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5879,7 +5880,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.30343592
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -5945,7 +5946,7 @@ MonoBehaviour:
   iterations: 10
   iterationInterval: 0.1
   force: 25
-  arrow: {fileID: 3432770794059792383, guid: c6b9855380f47fc4da65af68e671aace, type: 3}
+  arrow: {fileID: 6744386713444027877, guid: fcd7444fd2d8ae842b4ba02698c2084b, type: 3}
 --- !u!54 &1395675811
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10011,7 +10012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074525457461653713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 0, y: -7.3, z: 129.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 138299901}

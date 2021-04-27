@@ -42,14 +42,36 @@ public class Tile : MonoBehaviour
     IEnumerator ArrowSpawners()
 	{
         yield return new WaitForSeconds(1f); //İLK ÇAĞRILDIĞI ZAMAN BEKLEME
-		for (int i = 0; i < iterations; i++)
+		for (int i = 0; i < FindObjectOfType<Character>().arrowCount; i++)
 		{
-            GameObject go = Instantiate(arrow, bulletGhostTF.transform.position, FindObjectOfType<Character>().transform.rotation);
-            go.GetComponent<Rigidbody>().velocity = bulletSpawnTF.transform.position * force;
-            yield return new WaitForSeconds(5f); // HER İŞLEMDEN SONRA BEKLEME
+            GameObject go = Instantiate(arrow, bulletGhostTF.transform.position, bulletGhostTF.transform.rotation);
+            go.AddComponent<Arrow>();
+            go.GetComponent<Rigidbody>().velocity = bulletGhostTF.forward * force;
+            FindObjectOfType<Character>().arrowCount--;
+            yield return new WaitForSeconds(1f); // HER İŞLEMDEN SONRA BEKLEME
         } 
     }
-    
+
+
+    public class Arrow: MonoBehaviour
+	{
+		private void Update()
+		{
+            transform.forward = GetComponent<Rigidbody>().velocity; 
+		}
+
+		private void OnTriggerEnter(Collider other)
+		{
+			if (other.gameObject.CompareTag("Enemy"))
+			{
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                gameObject.transform.SetParent(other.transform);
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ 
+                    | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            }
+		}
+	}
+
 }
 
 

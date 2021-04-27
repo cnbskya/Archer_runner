@@ -14,6 +14,7 @@ TagManager:
   - GroundBalance
   - Arena
   - FinishLine
+  - Enemy
   layers:
   - Default
   - TransparentFX
