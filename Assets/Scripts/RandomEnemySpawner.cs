@@ -15,7 +15,6 @@ public class RandomEnemySpawner : MonoBehaviour
 	{
 		while (enemyCount < FindObjectOfType<Character>().arrowCount / 3)
 		{
-			Debug.Log(FindObjectOfType<Character>().arrowCount /2);
 			xPos = Random.Range(-5, 5);
 			zPos = Random.Range(-10, 0);
 			Instantiate(enemyPrefab, new Vector3(xPos, -7.3f, gameObject.transform.position.z + zPos), Quaternion.identity);

@@ -24,7 +24,6 @@ public class Tile : MonoBehaviour
 	void Update()
     {
         CalculateProjectileOnTime();
-        //ArrowSpawners();
     }
 
     public void CalculateProjectileOnTime()
@@ -42,12 +41,11 @@ public class Tile : MonoBehaviour
     IEnumerator ArrowSpawners()
 	{
         yield return new WaitForSeconds(1f); //İLK ÇAĞRILDIĞI ZAMAN BEKLEME
-		for (int i = 0; i < FindObjectOfType<Character>().arrowCount; i++)
+		for (int i = 1; i <= FindObjectOfType<Character>().arrowCount; FindObjectOfType<Character>().arrowCount--)
 		{
             GameObject go = Instantiate(arrow, bulletGhostTF.transform.position, bulletGhostTF.transform.rotation);
             go.AddComponent<Arrow>();
             go.GetComponent<Rigidbody>().velocity = bulletGhostTF.forward * force;
-            FindObjectOfType<Character>().arrowCount--;
             yield return new WaitForSeconds(1f); // HER İŞLEMDEN SONRA BEKLEME
         } 
     }

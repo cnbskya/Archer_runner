@@ -33,7 +33,15 @@ public class EnemyController : MonoBehaviour
         }
         
     }
-    void FaceTarget()
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Arrow"))
+		{
+            GetComponent<NavMeshAgent>().speed = 0;
+            Debug.Log(gameObject.GetComponent<NavMeshAgent>().speed);
+        }
+	}
+	void FaceTarget()
 	{
         Vector3 direction = (character.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
