@@ -8,8 +8,9 @@ public class UIManager : MonoBehaviour
 	public static UIManager instance;
 	public GameObject startGamePanel;
 	public GameObject inGameUI;
-	public GameObject endGamePanel;
+	public GameObject endGameFailPanel;
 	public GameObject swipePanel;
+	public GameObject levelSuccessPanel;
 
 	private void Awake()
 	{
@@ -23,12 +24,19 @@ public class UIManager : MonoBehaviour
 		inGameUI.SetActive(true);
 	}
 
-	public IEnumerator FinishScreenUI()
+	public IEnumerator FailFinishScreenUI()
 	{
 		yield return new WaitForSeconds(1.6f);
 		inGameUI.SetActive(false);
 		swipePanel.SetActive(true);
-		endGamePanel.SetActive(true);
+		endGameFailPanel.SetActive(true);
+	}
+	public IEnumerator SuccessFinishScreenUI()
+	{
+		yield return new WaitForSeconds(1.6f);
+		inGameUI.SetActive(false);
+		swipePanel.SetActive(true);
+		levelSuccessPanel.SetActive(true);
 	}
 
 	public void RestartGame()

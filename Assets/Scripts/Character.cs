@@ -61,7 +61,7 @@ public class Character : MonoBehaviour
 		{
 			animator.SetBool("isDead", true);
 			blood.Play();
-			GameManager.instance.OnGameFinish();
+			GameManager.instance.FailOnGameFinish();
 		}
 		else if (other.gameObject.CompareTag("Quiver"))
 		{
@@ -166,7 +166,7 @@ public class Character : MonoBehaviour
 		speed = 0;
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
-		GameManager.instance.OnGameFinish();
+		GameManager.instance.FailOnGameFinish();
 	}
 	public void OutGroundParetChanged(bool isTrue)
 	{
@@ -236,7 +236,7 @@ public class Character : MonoBehaviour
 	{
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
-		GameManager.instance.OnGameFinish();
+		GameManager.instance.FailOnGameFinish();
 	}
 
 }

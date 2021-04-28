@@ -69,23 +69,31 @@ public class Tile : MonoBehaviour
 				gameObject.transform.SetParent(other.transform);
 				Destroy(gameObject.GetComponent<Collider>());
 				gameObject.transform.localPosition = Vector3.zero;
-				
+
 				other.transform.gameObject.GetComponentInParent<NavMeshAgent>().speed = 0;
 				other.transform.gameObject.GetComponentInParent<Animator>().SetBool("isDead", true);
 				other.transform.gameObject.GetComponentInParent<EnemyController>().isDead = true;
 
-				for (int i = 0; i < FindObjectOfType<RandomEnemySpawner>().allEnemys.Count; i++)
+
+				AllEnemyDeadControl(other);
+			}
+		}
+		public void AllEnemyDeadControl(Collider other)
+		{
+			for (int i = 0; i < FindObjectOfType<RandomEnemySpawner>().allEnemys.Count; i++)
+			{
+				Debug.Log(FindObjectOfType<RandomEnemySpawner>().allEnemys.Count);
+				if (FindObjectOfType<RandomEnemySpawner>().allEnemys[i].GetComponentInParent<EnemyController>().isDead)
 				{
-					if (FindObjectOfType<RandomEnemySpawner>().allEnemys[i].GetComponentInParent<EnemyController>().isDead)
-					{
-						return;
-					}
-					else
-					{
-						//BÜTÜN DÜŞMANLAR ÖLDÜĞÜ İÇİN OYUN SONU YAPILACAK. 
-						// KARAKTERİN OK SPAWNI BİTİRİLECEK VE IDLEYE GEÇECEK.
-					}
+					FindObjectOfType<RandomEnemySpawner>().allEnemys.Remove(FindObjectOfType<RandomEnemySpawner>().allEnemys[i]);
 				}
+			}
+
+			if(FindObjectOfType<RandomEnemySpawner>().allEnemys.Count == 0)
+			{
+				FindObjectOfType<Character>().GetComponent<Animator>().SetBool("isVictory", true);
+				GameManager.instance.SuccessOnGameFinish();
+				
 			}
 		}
 	}

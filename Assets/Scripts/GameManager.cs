@@ -18,12 +18,17 @@ public class GameManager : MonoBehaviour
 		UIManager.instance.StartedScreenUI();
 	}
 
-	public void OnGameFinish()
+	public void FailOnGameFinish()
 	{
 		isGameOn = false;
 		touchPanel.SetActive(false);
-		StartCoroutine(UIManager.instance.FinishScreenUI());
-
+		StartCoroutine(UIManager.instance.FailFinishScreenUI());
+	}
+	public void SuccessOnGameFinish()
+	{
+		isGameOn = false;
+		touchPanel.SetActive(false);
+		StartCoroutine(UIManager.instance.SuccessFinishScreenUI());
 	}
 
 	public void İsSwipePanelActive(bool isSwipe)

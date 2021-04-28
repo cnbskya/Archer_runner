@@ -74,22 +74,7 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("isSword", true);
         }
     }
-    public void DoRagdoll(bool isRagdoll)
-    {
-        foreach (var col in allColliders)
-        {
-            col.enabled = isRagdoll;
-            col.GetComponent<Rigidbody>().useGravity = isRagdoll;
-            col.GetComponent<Rigidbody>().isKinematic = !isRagdoll;
-        }
-        //mainCollider.enabled = !isRagdoll;
-        GetComponent<Rigidbody>().useGravity = !isRagdoll;
-
-        if (GetComponent<Animator>() != null)
-            transform.GetChild(0).GetComponent<Animator>().enabled = !isRagdoll;
-    }
-
-    public void GetCharacterDead()
+    public void GetCharacterDead() // SWORD ANİM EVENT İLE ÇAĞIRILDI
 	{
         FindObjectOfType<Character>().InArenaDead();
 	}
