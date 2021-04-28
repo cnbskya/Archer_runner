@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     public float lookRadius = 10f;
     public Animator anim;
     public GameObject character;
+    public Collider mainCollider;
+    public Collider[] allColliders;
     NavMeshAgent agent;
     void Start()
     {
@@ -37,7 +39,7 @@ public class EnemyController : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Arrow"))
 		{
-            Debug.Log(gameObject.GetComponent<NavMeshAgent>().speed);
+            DoRagdoll(true);
         }
 	}
 	void FaceTarget()
@@ -79,5 +81,19 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(FindObjectOfType<Character>().InArenaDead()); // Character animation ended and dead,
             GameManager.instance.OnGameFinish();
         }
+    }
+    public void DoRagdoll(bool isRagdoll)
+    {
+        foreach (var col in allColliders)
+        {
+            col.enabled = isRagdoll;
+            col.GetComponent<Rigidbody>().useGravity = isRagdoll;
+            col.GetComponent<Rigidbody>().isKinematic = !isRagdoll;
+        }
+        mainCollider.enabled = !isRagdoll;
+        GetComponent<Rigidbody>().useGravity = !isRagdoll;
+
+        if (GetComponent<Animator>() != null)
+            transform.GetChild(0).GetComponent<Animator>().enabled = !isRagdoll;
     }
 }
