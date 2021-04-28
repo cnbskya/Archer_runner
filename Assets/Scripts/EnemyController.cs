@@ -69,8 +69,8 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("isWalking", true);
             FaceTarget();
         }
-		else if (distance <= 5f) 
-		{
+		else if (distance <= 5f) // ***************************************** BURANIN DÜZELTİLMESİ GEREKİYOR ***************************************** 
+        {
             anim.SetBool("isSword", true);
             StartCoroutine(FindObjectOfType<Character>().InArenaDead()); // Character animation ended and dead,
             GameManager.instance.OnGameFinish();
