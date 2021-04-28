@@ -86,7 +86,6 @@ public class Tile : MonoBehaviour
 						// KARAKTERİN OK SPAWNI BİTİRİLECEK VE IDLEYE GEÇECEK.
 					}
 				}
-				
 			}
 		}
 	}

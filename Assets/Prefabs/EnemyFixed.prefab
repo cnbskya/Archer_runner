@@ -1200,6 +1200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3441374882047276537}
   - component: {fileID: 3441374882047276538}
+  - component: {fileID: 7383112895426947974}
   - component: {fileID: 3441374882047276532}
   - component: {fileID: 3441374882047276533}
   - component: {fileID: 5873606484748506154}
@@ -1247,6 +1248,25 @@ NavMeshAgent:
   m_BaseOffset: -0.07
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &7383112895426947974
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441374882047276534}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0f83d794c8cbb9348ae534ac24802af0, type: 3}
+  m_Controller: {fileID: 9100000, guid: e38d7d9aae3fc0642b3381f6422e6e01, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &3441374882047276532
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1280,6 +1300,7 @@ MonoBehaviour:
   character: {fileID: 0}
   mainCollider: {fileID: 0}
   allColliders: []
+  isDead: 0
 --- !u!136 &5873606484748506154
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2440,7 +2461,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5991736004552028897}
-  - component: {fileID: 416232161432053915}
   m_Layer: 8
   m_Name: paladin_prop_j_nordstrom@T-Pose (1)
   m_TagString: Untagged
@@ -2467,25 +2487,6 @@ Transform:
   m_Father: {fileID: 3441374882047276537}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &416232161432053915
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6371815611496769627}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0f83d794c8cbb9348ae534ac24802af0, type: 3}
-  m_Controller: {fileID: 9100000, guid: e38d7d9aae3fc0642b3381f6422e6e01, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6443001585355977482
 GameObject:
   m_ObjectHideFlags: 0

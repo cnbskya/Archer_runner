@@ -232,9 +232,8 @@ public class Character : MonoBehaviour
 		animator.SetBool("isArena", true);
 		trejectory.SetActive(true);
 	}
-	public IEnumerator InArenaDead()
+	public void InArenaDead()
 	{
-		yield return new WaitForSeconds(0.4f);
 		DoRagdoll(true);
 		Destroy(GetComponent<Animator>());
 		GameManager.instance.OnGameFinish();

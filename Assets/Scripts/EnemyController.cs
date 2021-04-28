@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent agent;
     void Start()
     {
-        anim = transform.GetChild(0).GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         EnemyRandomSpeed();
     }
@@ -52,11 +52,11 @@ public class EnemyController : MonoBehaviour
         GetComponent<NavMeshAgent>().speed = Random.Range(1f, 2.2f); // 1f,2.2f
         if(GetComponent<NavMeshAgent>().speed < 2f)
 		{
-            transform.GetChild(0).GetComponent<Animator>().speed = 1;
+            GetComponent<Animator>().speed = 1;
 		}
 		else if (GetComponent<NavMeshAgent>().speed >= 2f && GetComponent<NavMeshAgent>().speed <= 2.2f)
 		{
-            transform.GetChild(0).GetComponent<Animator>().speed = 1.2f;
+            GetComponent<Animator>().speed = 1.2f;
         }
     }
     
@@ -72,8 +72,6 @@ public class EnemyController : MonoBehaviour
 		else if (distance <= 5f) // ***************************************** BURANIN DÜZELTİLMESİ GEREKİYOR ***************************************** 
         {
             anim.SetBool("isSword", true);
-            StartCoroutine(FindObjectOfType<Character>().InArenaDead()); // Character animation ended and dead,
-            GameManager.instance.OnGameFinish();
         }
     }
     public void DoRagdoll(bool isRagdoll)
@@ -90,4 +88,9 @@ public class EnemyController : MonoBehaviour
         if (GetComponent<Animator>() != null)
             transform.GetChild(0).GetComponent<Animator>().enabled = !isRagdoll;
     }
+
+    public void GetCharacterDead()
+	{
+        FindObjectOfType<Character>().InArenaDead();
+	}
 }
