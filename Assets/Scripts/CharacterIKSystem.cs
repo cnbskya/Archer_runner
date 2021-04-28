@@ -48,7 +48,7 @@ public class CharacterIKSystem : MonoBehaviour
     
 	void OnAnimatorIK(int layerIndex)
     {
-        // Right BOW Hand
+        //Right BOW Hand
         animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftBowPosition);
         animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftBowRotation);
         animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandBowTransform.position);
@@ -88,7 +88,6 @@ public class CharacterIKSystem : MonoBehaviour
         DOTween.To(x => leftBowPosition = x, leftBowPosition, 0f, duration);
         DOTween.To(x => leftBowRotation = x, leftBowRotation, 0f, duration);
     }
-
     public void IKBalanceWeightIncrease()
 	{
         DOTween.To(x => rightBalancePosition = x, rightBalancePosition, .5f, duration);
@@ -96,7 +95,6 @@ public class CharacterIKSystem : MonoBehaviour
         DOTween.To(x => leftBalancePosition = x, leftBalancePosition, .5f, duration);
         DOTween.To(x => leftBalanceRotation = x, leftBalanceRotation, .5f, duration);
     }
-
     public void IKBalanceWeightDecrease()
     {
         DOTween.To(x => rightBalancePosition = x, rightBalancePosition, 0f, duration);

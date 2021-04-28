@@ -37,7 +37,6 @@ public class EnemyController : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Arrow"))
 		{
-            GetComponent<NavMeshAgent>().speed = 0;
             Debug.Log(gameObject.GetComponent<NavMeshAgent>().speed);
         }
 	}

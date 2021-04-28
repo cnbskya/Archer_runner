@@ -126,6 +126,7 @@ public class Character : MonoBehaviour
 		Debug.Log("OutGround");
 		// DEĞİŞİM İÇİN BOW VE CHARACTER ÜZERİNDE YAPILAN İŞLEMLER
 		OutGroundParetChanged(true);
+		StartCoroutine(MeshBowInActive(true));
 		FindObjectOfType<CharacterIKSystem>().IKBowWeightIncrease(); // IK POSİTİON LERP İŞLEMİ
 																	 // PARENT DEĞİŞİM İŞLEMLERİ 
 		slideBow.transform.SetParent(null);
@@ -170,13 +171,17 @@ public class Character : MonoBehaviour
 	}
 	public void OutGroundParetChanged(bool isTrue)
 	{
-		bowSkinnedMesh.SetActive(!isTrue);
 		slideBow.GetComponent<Collider>().enabled = isTrue;
 		slideBow.GetComponent<Rigidbody>().isKinematic = !isTrue;
 		slideBow.GetComponent<Rigidbody>().useGravity = isTrue;
 		animator.SetBool("isHanging", isTrue);
 		isCharacterForward = !isTrue;
 		slideBow.SetActive(isTrue);
+	}
+	IEnumerator MeshBowInActive(bool isTrue)
+	{
+		yield return new WaitForSeconds(0.3f);
+		bowSkinnedMesh.SetActive(!isTrue);
 	}
 	public void GoForward()
 	{

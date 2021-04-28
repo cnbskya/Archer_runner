@@ -46,7 +46,7 @@ public class Tile : MonoBehaviour
             GameObject go = Instantiate(arrow, bulletGhostTF.transform.position, bulletGhostTF.transform.rotation);
             go.AddComponent<Arrow>();
             go.GetComponent<Rigidbody>().velocity = bulletGhostTF.forward * force;
-            yield return new WaitForSeconds(1f); // HER İŞLEMDEN SONRA BEKLEME
+            yield return new WaitForSeconds(1.2f); // HER İŞLEMDEN SONRA BEKLEME
         } 
     }
 

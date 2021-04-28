@@ -15,6 +15,7 @@ TagManager:
   - Arena
   - FinishLine
   - Enemy
+  - Arrow
   layers:
   - Default
   - TransparentFX
