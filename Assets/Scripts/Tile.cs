@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Tile : MonoBehaviour
 {
 	[Header("PROTECT TILE VARIABLES")]
@@ -65,13 +65,28 @@ public class Tile : MonoBehaviour
 		{
 			if (other.gameObject.CompareTag("Enemy"))
 			{
-				Debug.Log(other.name);
 				Destroy(gameObject.GetComponent<Rigidbody>());
 				gameObject.transform.SetParent(other.transform);
 				Destroy(gameObject.GetComponent<Collider>());
 				gameObject.transform.localPosition = Vector3.zero;
-				//gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ
-					//| RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+				
+				other.transform.gameObject.GetComponentInParent<NavMeshAgent>().speed = 0;
+				other.transform.gameObject.GetComponentInParent<Animator>().SetBool("isDead", true);
+				other.transform.gameObject.GetComponentInParent<EnemyController>().isDead = true;
+
+				for (int i = 0; i < FindObjectOfType<RandomEnemySpawner>().allEnemys.Count; i++)
+				{
+					if (FindObjectOfType<RandomEnemySpawner>().allEnemys[i].GetComponentInParent<EnemyController>().isDead)
+					{
+						return;
+					}
+					else
+					{
+						//BÜTÜN DÜŞMANLAR ÖLDÜĞÜ İÇİN OYUN SONU YAPILACAK. 
+						// KARAKTERİN OK SPAWNI BİTİRİLECEK VE IDLEYE GEÇECEK.
+					}
+				}
+				
 			}
 		}
 	}

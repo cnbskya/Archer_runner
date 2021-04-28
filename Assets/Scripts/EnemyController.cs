@@ -10,13 +10,14 @@ public class EnemyController : MonoBehaviour
     public GameObject character;
     public Collider mainCollider;
     public Collider[] allColliders;
+    public bool isDead;
     NavMeshAgent agent;
     void Start()
     {
         anim = transform.GetChild(0).GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         EnemyRandomSpeed();
-     }
+    }
 
     // Update is called once per frame
     void Update()
@@ -35,13 +36,6 @@ public class EnemyController : MonoBehaviour
         }
         
     }
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.gameObject.CompareTag("Arrow"))
-		{
-            DoRagdoll(true);
-        }
-	}
 	void FaceTarget()
 	{
         Vector3 direction = (character.transform.position - transform.position).normalized;
@@ -90,7 +84,7 @@ public class EnemyController : MonoBehaviour
             col.GetComponent<Rigidbody>().useGravity = isRagdoll;
             col.GetComponent<Rigidbody>().isKinematic = !isRagdoll;
         }
-        mainCollider.enabled = !isRagdoll;
+        //mainCollider.enabled = !isRagdoll;
         GetComponent<Rigidbody>().useGravity = !isRagdoll;
 
         if (GetComponent<Animator>() != null)
