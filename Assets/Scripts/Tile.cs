@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
 	public bool isFallen;
 	public Transform bulletGhostTF;
 	public Transform bulletSpawnTF;
+	public Coroutine arrowSpawnCoroutine;
 	public Vector3 target;
 	public int iterations;
 	public float iterationInterval;
@@ -19,7 +20,7 @@ public class Tile : MonoBehaviour
 
 	private void Start()
 	{
-		StartCoroutine(ArrowSpawners());
+		arrowSpawnCoroutine = StartCoroutine(ArrowSpawners());
 	}
 	void Update()
 	{
@@ -41,12 +42,16 @@ public class Tile : MonoBehaviour
 	public IEnumerator ArrowSpawners()
 	{
 		yield return new WaitForSeconds(1f); //İLK ÇAĞRILDIĞI ZAMAN BEKLEME
+
 		for (int i = 1; i <= FindObjectOfType<Character>().arrowCount; FindObjectOfType<Character>().arrowCount--)
 		{
-			GameObject go = Instantiate(arrow, bulletGhostTF.transform.position, bulletGhostTF.transform.rotation);
-			go.AddComponent<Arrow>();
-			go.GetComponent<Rigidbody>().velocity = bulletGhostTF.forward * force;
-			yield return new WaitForSeconds(1.2f); // HER İŞLEMDEN SONRA BEKLEME
+			if (!FindObjectOfType<Character>().isEnd)
+			{
+				GameObject go = Instantiate(arrow, bulletGhostTF.transform.position, bulletGhostTF.transform.rotation);
+				go.AddComponent<Arrow>();
+				go.GetComponent<Rigidbody>().velocity = bulletGhostTF.forward * force;
+				yield return new WaitForSeconds(1.2f); // HER İŞLEMDEN SONRA BEKLEME
+			}
 		}
 	}
 
@@ -74,11 +79,10 @@ public class Tile : MonoBehaviour
 				other.transform.gameObject.GetComponentInParent<Animator>().SetBool("isDead", true);
 				other.transform.gameObject.GetComponentInParent<EnemyController>().isDead = true;
 
-
-				AllEnemyDeadControl(other);
+				AllEnemyDeadControl();
 			}
 		}
-		public void AllEnemyDeadControl(Collider other)
+		public void AllEnemyDeadControl()
 		{
 			for (int i = 0; i < FindObjectOfType<RandomEnemySpawner>().allEnemys.Count; i++)
 			{
@@ -89,10 +93,12 @@ public class Tile : MonoBehaviour
 				}
 			}
 
-			if(FindObjectOfType<RandomEnemySpawner>().allEnemys.Count == 0)
+			if (FindObjectOfType<RandomEnemySpawner>().allEnemys.Count == 0)
 			{
+				FindObjectOfType<Character>().isEnd = true;
+				FindObjectOfType<Tile>().iterationInterval = 0;
 				FindObjectOfType<Character>().GetComponent<Animator>().SetBool("isVictory", true);
-				StopAllCoroutines();
+
 				GameManager.instance.SuccessOnGameFinish();
 			}
 		}

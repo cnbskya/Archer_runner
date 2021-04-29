@@ -26,6 +26,7 @@ public class Character : MonoBehaviour
 	public bool isBalance;
 	public bool isArena;
 	public bool inGround;
+	public bool isEnd = false;
 
 
 	private void Awake()
@@ -247,8 +248,10 @@ public class Character : MonoBehaviour
 	public void InArenaDead()
 	{
 		DoRagdoll(true);
+		blood.Play();
 		Destroy(GetComponent<Animator>());
 		GameManager.instance.FailOnGameFinish();
+		
 	}
 
 }
