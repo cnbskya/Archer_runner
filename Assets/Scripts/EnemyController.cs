@@ -64,6 +64,7 @@ public class EnemyController : MonoBehaviour
 	{
         yield return new WaitForSeconds(FindObjectOfType<Character>().shootDelay);
         agent.SetDestination(character.transform.position);
+
         if (distance > 5f)
         {
             anim.SetBool("isWalking", true);

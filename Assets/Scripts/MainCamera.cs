@@ -8,11 +8,16 @@ public class MainCamera : MonoBehaviour
 	public GameObject rotatingObject;
 	public float smoothSpeed;
 	public Vector3 DefaultOffset;
-	void Update()
+	void LateUpdate()
 	{
-		if (GameManager.instance.isGameOn)
+		if (!FindObjectOfType<Character>().isArena && GameManager.instance.isGameOn)
 		{
 			DefaultOffset = new Vector3(0, 4, -4);
+			CameraRePosition(DefaultOffset);
+		}
+		else if (FindObjectOfType<Character>().isArena && GameManager.instance.isGameOn)
+		{
+			DefaultOffset = new Vector3(0, 2.5f, -2);
 			CameraRePosition(DefaultOffset);
 		}
 	}

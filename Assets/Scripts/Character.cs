@@ -10,6 +10,8 @@ public class Character : MonoBehaviour
 	public GameObject slideBow;
 	public GameObject bowSkinnedMesh;
 	public GameObject trejectory;
+	public GameObject arrow;
+	public Transform arrowFallPos;
 	public Collider[] allColliders;
 	public Collider mainCollider;
 	[SerializeField] Rigidbody rb;
@@ -51,7 +53,17 @@ public class Character : MonoBehaviour
 		if (other.gameObject.CompareTag("GroundObstacle"))
 		{
 			animator.SetBool("groundReact", true);
-			//animator.SetBool
+			
+			if (arrowCount >= 3)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					GameObject go = Instantiate(arrow, arrowFallPos.position, Quaternion.Euler(arrowFallPos.rotation.x, arrowFallPos.rotation.y + Random.Range(0f, 180f), arrowFallPos.rotation.z));
+					Destroy(go, 2f);
+				}
+				arrowCount -= 3;
+			}
+			
 		}
 		else if (other.gameObject.CompareTag("AirObstacle"))
 		{

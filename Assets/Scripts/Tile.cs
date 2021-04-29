@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour
 		}
 	}
 
-	IEnumerator ArrowSpawners()
+	public IEnumerator ArrowSpawners()
 	{
 		yield return new WaitForSeconds(1f); //İLK ÇAĞRILDIĞI ZAMAN BEKLEME
 		for (int i = 1; i <= FindObjectOfType<Character>().arrowCount; FindObjectOfType<Character>().arrowCount--)
@@ -92,8 +92,8 @@ public class Tile : MonoBehaviour
 			if(FindObjectOfType<RandomEnemySpawner>().allEnemys.Count == 0)
 			{
 				FindObjectOfType<Character>().GetComponent<Animator>().SetBool("isVictory", true);
+				StopAllCoroutines();
 				GameManager.instance.SuccessOnGameFinish();
-				
 			}
 		}
 	}
