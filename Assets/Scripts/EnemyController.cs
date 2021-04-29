@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     public GameObject character;
     public Collider mainCollider;
     public Collider[] allColliders;
+    public ParticleSystem energyParticle;
     public bool isDead;
     NavMeshAgent agent;
     void Start()
@@ -17,6 +18,7 @@ public class EnemyController : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         EnemyRandomSpeed();
+        energyParticle.Play();
     }
 
     // Update is called once per frame

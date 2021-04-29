@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.41482317, g: 0.44297922, b: 0.51877576, a: 1}
+  m_IndirectSpecularColor: {r: 0.5835728, g: 0.62531674, b: 0.7279263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2745,6 +2745,7 @@ GameObject:
   - component: {fileID: 578695597}
   - component: {fileID: 578695599}
   - component: {fileID: 578695598}
+  - component: {fileID: 578695600}
   m_Layer: 5
   m_Name: StartGamePanel
   m_TagString: Untagged
@@ -2786,7 +2787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.14901961, g: 0.14901961, b: 0.14901961, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2810,6 +2811,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578695596}
   m_CullTransparentMesh: 0
+--- !u!95 &578695600
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578695596}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44d3cbfc24cc3ca4b9d62d7176092591, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &591705248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8160500657111870824, guid: 069451d5d29ef7743882a2fca1543425,
@@ -4290,7 +4310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896984891}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.68, y: -10.35, z: 99.4}
+  m_LocalPosition: {x: 9.68, y: -15.1, z: 99.4}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10551,7 +10571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2718073252682558316}
   m_LocalRotation: {x: -0.9712717, y: -0, z: -0, w: 0.23797365}
-  m_LocalPosition: {x: 0, y: 1, z: 0.106}
+  m_LocalPosition: {x: 0, y: 1.027, z: 0.027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1693882621659048555}
