@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
 	public GameObject target;
-	public GameObject rotatingObject;
+	public ParticleSystem wind;
 	public float smoothSpeed;
 	public Vector3 DefaultOffset;
 	void LateUpdate()
@@ -20,6 +20,7 @@ public class MainCamera : MonoBehaviour
 			DefaultOffset = new Vector3(0, 2.5f, -2);
 			CameraRePosition(DefaultOffset);
 		}
+
 	}
 
 	public void CameraRePosition(Vector3 DefaultOffset)

@@ -98,7 +98,6 @@ public class Tile : MonoBehaviour
 				FindObjectOfType<Character>().isEnd = true;
 				FindObjectOfType<Tile>().iterationInterval = 0;
 				FindObjectOfType<Character>().GetComponent<Animator>().SetBool("isVictory", true);
-
 				GameManager.instance.SuccessOnGameFinish();
 			}
 		}

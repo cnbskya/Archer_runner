@@ -128,6 +128,7 @@ public class Character : MonoBehaviour
 		// ENEMY SPAWN VE HAREKET İŞLEMLERİ ÇAĞIRILIYOR.
 		StartCoroutine(FindObjectOfType<RandomEnemySpawner>().EnemyDrop());
 		StartCoroutine(ToDoInArena());
+		Destroy(FindObjectOfType<MainCamera>().wind);
 	}
 	public void OutArena()
 	{
