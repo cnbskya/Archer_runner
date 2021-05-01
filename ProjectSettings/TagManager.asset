@@ -16,6 +16,7 @@ TagManager:
   - FinishLine
   - Enemy
   - Arrow
+  - FailTrigger
   layers:
   - Default
   - TransparentFX

@@ -84,6 +84,10 @@ public class Character : MonoBehaviour
 		{
 			speed = 0;
 			animator.SetBool("isFinish", true);
+		}else if (other.gameObject.CompareTag("FailTrigger"))
+		{
+			OutBalanceAndDead();
+			slideBow.GetComponent<Collider>().isTrigger = true;
 		}
 		// ************ GAMEPLAY TRİGGERS ************
 		if (other.gameObject.CompareTag("Ground")) // Ground ile tetiklenmişse
