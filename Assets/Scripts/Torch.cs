@@ -22,17 +22,6 @@ public class Torch : MonoBehaviour
 
 	private void Update()
 	{
-		if (pointLight.GetComponent<Light>().intensity < 3f && isMax)
-		{
-			pointLight.GetComponent<Light>().intensity += 0.01f;
-		}
-		else isMax = false;
-
-		if (pointLight.GetComponent<Light>().intensity >= 2f && isMax == false)
-		{
-			pointLight.GetComponent<Light>().intensity -= 0.01f;
-		}
-		else isMax = true;
 
 	}
 }
