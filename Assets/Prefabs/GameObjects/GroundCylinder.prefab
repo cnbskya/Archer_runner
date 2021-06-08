@@ -110,7 +110,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3755795115593462673
 Transform:
@@ -120,8 +120,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3755795115593462677}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: -3.75}
-  m_LocalScale: {x: 5, y: 5, z: 35}
+  m_LocalPosition: {x: 0, y: -5.427, z: -3.75}
+  m_LocalScale: {x: 5, y: 10.629045, z: 35.000015}
   m_Children: []
   m_Father: {fileID: 3252849745445951430}
   m_RootOrder: 0
@@ -203,7 +203,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3755795115988578131
 Transform:
@@ -213,8 +213,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3755795115988578135}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6, y: -2.4, z: -3.75}
-  m_LocalScale: {x: 0.2, y: 5, z: 35}
+  m_LocalPosition: {x: -2.6, y: -5.215, z: -3.75}
+  m_LocalScale: {x: 0.2, y: 10.629045, z: 35.000015}
   m_Children: []
   m_Father: {fileID: 3252849745445951430}
   m_RootOrder: 2
@@ -296,7 +296,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3755795116430427417
 Transform:
@@ -306,8 +306,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3755795116430427421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6, y: -2.4, z: -3.75}
-  m_LocalScale: {x: 0.2, y: 5, z: 35}
+  m_LocalPosition: {x: 2.6, y: -5.215, z: -3.75}
+  m_LocalScale: {x: 0.2, y: 10.629045, z: 35.000015}
   m_Children: []
   m_Father: {fileID: 3252849745445951430}
   m_RootOrder: 1
@@ -389,7 +389,7 @@ GameObject:
   m_TagString: SlideStick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3755795116559046022
 Transform:
@@ -483,7 +483,7 @@ GameObject:
   m_TagString: SlideStick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3755795116693260978
 Transform:
@@ -574,7 +574,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3252849745445951430
 Transform:
